@@ -32,6 +32,11 @@ if (paramString) {
 function setState(entity, state) {
     document.getElementById(`text-${entity}`).innerHTML = entities[entity][state];
     document.getElementById(`img-${entity}`).src = `${entity}-${state}.svg`;
+    if (state == "closed") {
+        document.getElementById(`dot-${entity}`).style.setProperty("background-color", "#2ADE33", "important");
+    } else if (state == "open") {
+        document.getElementById(`dot-${entity}`).style.setProperty("background-color", "#AF0900", "important");
+    };
 };
 
 function getStates() {

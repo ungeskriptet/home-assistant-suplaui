@@ -1,35 +1,24 @@
 .ui-listview > li {
     display: table;
     width: 100%;
-    /*-webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;*/
 }
 
 .ui-listview > li > a.ui-btn {
     line-height: 60px;
     overflow: initial;
     margin-right: 0;
-    /*-webkit-transition: -webkit-transform 400ms ease-out;
-    -moz-transition: -moz-transform 400ms ease-out;
-    -o-transition: -o-transform 400ms ease-out;*/
     transition: transform 400ms ease-out;
 }
 
 .ui-listview > li span.toggle {
     z-index: auto;
     box-sizing: border-box;
-    /*-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;*/
     height: 83.4px;
     width: 0;
     float: right;
     display: table-cell;
-    /*-webkit-transition: width 380ms ease-out;
-    -moz-transition: width 380ms ease-out;
-    -o-transition: width 380ms ease-out;*/
     transition: width 380ms ease-out;
-    background-color: #FF3B30 !important;
+    background-color: #AF0900 !important;
 }
 
 .ui-listview > li span.show {
@@ -54,4 +43,14 @@
     user-select: none;
     max-height: 83.4px;
     margin-left: 10px;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  background-color: #bbb;
 }
