@@ -1,0 +1,57 @@
+.ui-listview > li {
+    display: table;
+    width: 100%;
+    /*-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;*/
+}
+
+.ui-listview > li > a.ui-btn {
+    line-height: 60px;
+    overflow: initial;
+    margin-right: 0;
+    /*-webkit-transition: -webkit-transform 400ms ease-out;
+    -moz-transition: -moz-transform 400ms ease-out;
+    -o-transition: -o-transform 400ms ease-out;*/
+    transition: transform 400ms ease-out;
+}
+
+.ui-listview > li span.toggle {
+    z-index: auto;
+    box-sizing: border-box;
+    /*-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;*/
+    height: 83.4px;
+    width: 0;
+    float: right;
+    display: table-cell;
+    /*-webkit-transition: width 380ms ease-out;
+    -moz-transition: width 380ms ease-out;
+    -o-transition: width 380ms ease-out;*/
+    transition: width 380ms ease-out;
+    background-color: #FF3B30 !important;
+}
+
+.ui-listview > li span.show {
+    width: 70px;
+    cursor: pointer;
+}
+
+.ui-listview > li p.btn {
+    line-height: 64.2px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1em;
+    text-shadow: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-rendering: optimizeLegibility;
+    text-overflow: clip;
+    user-select: none;
+}
+
+.ui-listview > li img {
+    user-select: none;
+    max-height: 83.4px;
+    margin-left: 10px;
+}
