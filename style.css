@@ -1,3 +1,8 @@
+span {
+    color: #38c;
+    user-select: none;
+}
+
 .ui-listview > li {
     display: table;
     width: 100%;
