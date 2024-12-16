@@ -1,23 +1,24 @@
-let host = "example.org"
 let entities = {
     garage: {
         actor: "input_boolean.test",
-        sensor: "input_boolean.test",
         closed: "Garaż (ZAMKNIĘTY)",
         open: "Garaż (OTWARTY)"
     },
     gate: {
         actor: "input_boolean.test1",
-        sensor: "input_boolean.test1",
         closed: "Brama (ZAMKNIĘTA)",
         open: "Brama (OTWARTA)"
     }
 };
+let host = window.location.host;
+let closedString = "on";
+let openString = "off";
+let entityType = entities.garage.actor.split(".")[0];
 let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);
 let xhr = new XMLHttpRequest();
 
-if (paramString) {
+if (queryString) {
     for(let pair of queryString.entries()) {
         if (pair[0] == "token") {
             var token = pair[1]
@@ -34,24 +35,28 @@ function setState(entity, state) {
     document.getElementById(`img-${entity}`).src = `${entity}-${state}.svg`;
     if (state == "closed") {
         document.getElementById(`dot-${entity}`).style.setProperty("background-color", "#2ADE33", "important");
+        document.getElementById(`toggle-${entity}`).style.setProperty("background-color", "#2ADE33", "important");
+        document.getElementById(`btn-${entity}`).innerHTML = "Otwórz"
     } else if (state == "open") {
         document.getElementById(`dot-${entity}`).style.setProperty("background-color", "#AF0900", "important");
+        document.getElementById(`toggle-${entity}`).style.setProperty("background-color", "#AF0900", "important");
+        document.getElementById(`btn-${entity}`).innerHTML = "Zamknij"
     };
 };
 
 function getStates() {
     for (let entity in entities) {
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", `https://${host}/api/states/${entities[entity].sensor}`, true);
+        xhr.open("GET", `https://${host}/api/states/${entities[entity].actor}`, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 if (xhr.status == 200) {
                     let response = JSON.parse(this.response)
-                    if (response.state == "on") {
+                    if (response.state == closedString) {
                         setState(entity, "closed");
-                    } else if (response.state == "off") {
+                    } else if (response.state == openString) {
                         setState(entity, "open");
                     };
                 } else if (xhr.status == 401) {
@@ -80,10 +85,10 @@ if (token) {
                     alert("WebSocket: Nieprawidłowy token");
                     break;
                 case "auth_ok":
-                    socket.send(JSON.stringify({id: 1, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.garage.sensor, from: "off", to: "on"}}));
-                    socket.send(JSON.stringify({id: 2, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.garage.sensor, from: "on", to: "off"}}));
-                    socket.send(JSON.stringify({id: 3, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.gate.sensor, from: "off", to: "on"}}));
-                    socket.send(JSON.stringify({id: 4, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.gate.sensor, from: "on", to: "off"}}));
+                    socket.send(JSON.stringify({id: 1, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.garage.actor, from: openString, to: closedString}}));
+                    socket.send(JSON.stringify({id: 2, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.garage.actor, from: closedString, to: openString}}));
+                    socket.send(JSON.stringify({id: 3, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.gate.actor, from: openString, to: closedString}}));
+                    socket.send(JSON.stringify({id: 4, type: "subscribe_trigger", trigger: {platform: "state", entity_id: entities.gate.actor, from: closedString, to: openString}}));
                     break;
                 case "event":
                     switch (wsdata.id) {
@@ -107,7 +112,7 @@ if (token) {
 
     $(document).on("click", "#toggle-garage", function () {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", `https://${host}/api/services/input_boolean/toggle`, true);
+        xhr.open("POST", `https://${host}/api/services/${entityType}/toggle`, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 if (xhr.status == 401) {
@@ -122,7 +127,7 @@ if (token) {
         xhr.send(JSON.stringify({entity_id: entities.garage.actor}));
     }).on("click", "#toggle-gate", function () {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", `https://${host}/api/services/input_boolean/toggle`, true);
+        xhr.open("POST", `https://${host}/api/services/${entityType}/toggle`, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 if (xhr.status == 401) {
@@ -135,11 +140,11 @@ if (token) {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         xhr.send(JSON.stringify({entity_id: entities.gate.actor}));
-    }).on("swipeleft", "ul li a", function (e) {
+    }).on("swipeleft", ".swipe", function (e) {
         $(this).prevAll("span").addClass("show");
         $(this).off("click").blur();
         $(this).css({
-            transform: "translateX(-70px)"
+            transform: "translateX(-80px)"
         }).one("transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd", function () {
             $(this).one("swiperight", function () {
                 $(this).prevAll("span").removeClass("show");

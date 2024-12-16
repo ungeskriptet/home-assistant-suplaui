@@ -16,15 +16,21 @@
                 <ul data-role="listview" id="list">
                     <li>
                         <span class="toggle" id="toggle-gate">
-                            <p class="btn">Dawaj</p>
+                            <p id="btn-gate" class="btn-toggle"></p>
                         </span>
-                        <a draggable="false"><img draggable="false" src="gate-closed.svg" id="img-gate"><span id="text-gate">Brama</span><span id="dot-gate" class="dot"></span></a>
+                        <div class="swipe"><div class="list-entity">
+                            <div class="icon-entity"><img draggable="false" src="gate-closed.svg" id="img-gate"></div>
+                            <a draggable="false"><span id="text-gate">Brama</span><span id="dot-gate" class="dot"></span></a>
+                        </div></div>
                     </li>
                     <li>
                         <span class="toggle" id="toggle-garage">
-                            <p class="btn">Dawaj</p>
+                            <p id="btn-garage" class="btn-toggle"></p>
                         </span>
-                        <a draggable="false"><img draggable="false" src="garage-closed.svg" id="img-garage"><span id="text-garage">Garaż</span><span id="dot-garage" class="dot"></span></a>
+                        <div class="swipe"><div class="list-entity">
+                            <div class="icon-entity"><img draggable="false" src="garage-closed.svg" id="img-garage"></div>
+                            <a draggable="false"><span id="text-garage">Garaż</span><span id="dot-garage" class="dot"></span></a>
+                        </div></div>
                     </li>
                 </ul>
             </div>

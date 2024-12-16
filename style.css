@@ -3,31 +3,40 @@
     width: 100%;
 }
 
-.ui-listview > li > a.ui-btn {
-    line-height: 60px;
-    overflow: initial;
-    margin-right: 0;
+.ui-listview > .ui-li-static {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+.swipe {
     transition: transform 400ms ease-out;
 }
 
-.ui-listview > li span.toggle {
+.list-entity {
+    overflow: initial;
+    display: table;
+    margin: 0 auto;
+}
+
+.toggle {
     z-index: auto;
     box-sizing: border-box;
-    height: 83.4px;
+    height: 143.2px;
     width: 0;
     float: right;
     display: table-cell;
     transition: width 380ms ease-out;
-    background-color: #AF0900 !important;
+    background-color: #bbb;
 }
 
-.ui-listview > li span.show {
-    width: 70px;
+.show {
+    width: 80px;
     cursor: pointer;
 }
 
-.ui-listview > li p.btn {
-    line-height: 64.2px;
+.ui-listview > li p.btn-toggle {
+    line-height: 143.2px;
     text-align: center;
     vertical-align: middle;
     font-size: 1em;
@@ -37,20 +46,23 @@
     text-rendering: optimizeLegibility;
     text-overflow: clip;
     user-select: none;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .ui-listview > li img {
+    display: table;
+    margin: 0 auto;
     user-select: none;
-    max-height: 83.4px;
-    margin-left: 10px;
+    max-height: 85px;
 }
 
 .dot {
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  background-color: #bbb;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    background-color: #bbb;
 }
